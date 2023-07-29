@@ -23,7 +23,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/media_product.mk)
 # /product packages
 PRODUCT_PACKAGES += \
     Calendar \
-    Camera2 \
     Contacts \
     DeskClock \
     Gallery2 \
@@ -33,6 +32,16 @@ PRODUCT_PACKAGES += \
     preinstalled-packages-platform-handheld-product.xml \
     SettingsIntelligence \
     frameworks-base-overlays
+
+ifneq ($(PRODUCT_NO_CAMERA),true)
+PRODUCT_PACKAGES += \
+    Camera2
+endif
+
+ifeq ($(LINEAGE_BUILD),)
+PRODUCT_PACKAGES += \
+    LatinIME
+endif
 
 PRODUCT_PACKAGES_DEBUG += \
     frameworks-base-overlays-debug
